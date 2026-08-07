@@ -1,0 +1,13 @@
+# Codex 命令审批规则（结构来自上游 archibate/dotfiles-codex rules/default.rules）
+# 这些常用且安全的命令在任意项目中直接放行，不必逐条确认。
+prefix_rule(pattern=["uv", "run"], decision="allow")
+prefix_rule(pattern=["pueue", "status"], decision="allow")
+prefix_rule(pattern=["pueue", "log"], decision="allow")
+prefix_rule(pattern=["git", "add"], decision="allow")
+prefix_rule(pattern=["git", "commit"], decision="allow")
+prefix_rule(pattern=["git", "remote"], decision="allow")
+prefix_rule(pattern=["git", "ls-remote"], decision="allow")
+prefix_rule(pattern=["git", "push"], decision="allow")
+prefix_rule(pattern=["gh", "auth", "status"], decision="allow")
+prefix_rule(pattern=["gh", "repo", "view"], decision="allow")
+prefix_rule(pattern=["gh", "repo", "create"], decision="allow")

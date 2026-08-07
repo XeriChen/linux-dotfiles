@@ -1,0 +1,38 @@
+# Codex CLI 全局配置（经 GNU Stow 软链到 ~/.codex/config.toml）
+# 结构参考上游：archibate/dotfiles-codex（config.toml）
+#
+# 默认策略：bypass + yolo
+#   - 家目录内所有项目 trust_level = "trusted" → 不再逐条弹审批
+#   - rules/default.rules 放行常见安全命令（git / gh 等）
+# 私人项（model、API Key、供应商）一律留注释占位，由本机填写，不入库。
+
+# 个性（非私人，可保留；上游同字段）
+personality = "friendly"
+
+# 默认模型（私人，按本机可用模型填写；上游示例为 gpt-5.4）
+# model = "gpt-5-codex"
+# model_reasoning_effort = "high"
+# plan_mode_reasoning_effort = "high"
+
+# 审批复核子代理：yolo 模式下可注释掉以彻底免审
+# approvals_reviewer = "guardian_subagent"
+
+# —— bypass：信任整个家目录，家目录下操作一律免审批 ——
+# 把 your-username 改成你 Ubuntu 上的实际用户名（用 `id -un` 查看）
+[projects."/home/your-username"]
+trust_level = "trusted"
+
+# 如需额外信任其他路径，按此格式追加：
+# [projects."/home/your-username/Projects"]
+# trust_level = "trusted"
+
+# —— 自定义模型供应商（私人，按需启用；格式来自上游 model_providers）——
+# [model_providers.myprovider]
+# name = "My Provider"
+# base_url = "https://api.example.com/v1"
+# env_key = "MY_PROVIDER_API_KEY"
+# wire_api = "responses"
+
+# TUI 状态栏（结构来自上游）
+[tui]
+status_line = ["model-with-reasoning", "current-dir", "git-branch", "context-remaining"]

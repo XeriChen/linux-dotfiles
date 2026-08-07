@@ -1,0 +1,44 @@
+# Git 全局配置（Ubuntu 24）
+# delta 增强依赖: sudo apt install git-delta（未装时 git 自动回退默认 pager）
+
+[user]
+    name = Chen Xiaorui
+    email = xeri_chen@163.com
+
+[init]
+    defaultBranch = main
+
+[core]
+    editor = nvim
+    autocrlf = input
+    pager = delta
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true
+    dark = true
+
+[pull]
+    rebase = false
+
+[merge]
+    conflictStyle = zdiff3
+
+[alias]
+    st = status
+    co = checkout
+    br = branch
+    lg = log --oneline --graph --decorate -10
+    ca = commit --amend
+    aa = add -A
+    df = diff
+    dw = diff --word-diff
+    pl = pull
+    ps = push
+    rh = reset --hard
+    cb = checkout -b
+    rb = rebase
+    ss = stash
+    sp = stash pop

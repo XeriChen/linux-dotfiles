@@ -1,0 +1,15 @@
+# 强制仓库内文本文件使用 LF 行尾（Windows 编辑器易写 CRLF，会破坏 Linux 上 shell 执行）
+* text=auto eol=lf
+
+*.sh      text eol=lf
+*.fish    text eol=lf
+*.lua     text eol=lf
+*.toml    text eol=lf
+*.md      text eol=lf
+*.json     text eol=lf
+*.py       text eol=lf
+*.jsonc    text eol=lf
+.gitconfig text eol=lf
+*.ttf     binary
+*.ttc     binary
+*.otf     binary

@@ -1,0 +1,60 @@
+{
+    "$schema": "https://opencode.ai/config.json",
+    "experimental": {
+        "mcp_timeout": 120000
+    },
+    "mcp": {
+        "grep": {
+            "type": "remote",
+            "url": "https://mcp.grep.app",
+            "enabled": false
+        },
+        "context7": {
+            "type": "local",
+            "command": [
+                "npx",
+                "-y",
+                "@upstash/context7-mcp",
+                "--api-key",
+                "{env:CONTEXT7_API_KEY}"
+            ],
+            "enabled": false
+        }
+    },
+    "permission": {
+        "external_directory": {
+            "*": "allow"
+        }
+    },
+    "plugin": [
+        "@franlol/opencode-md-table-formatter@0.0.3",
+        "opencode-pty@0.2.1",
+        "@mohak34/opencode-notifier@0.1.19"
+    ],
+    "formatter": {
+        "stylua": {
+            "command": ["stylua", "-", "$FILE"],
+            "extensions": [".lua"]
+        }
+    }
+    // —— 模型 / 供应商（私人项，留注释占位，由本机填写；结构来自上游 archibate/opencode.jsonc）——
+    // 默认策略：bypass + yolo → permission.external_directory."*" = "allow"，跨目录操作一律放行。
+    // 启用时取消对应注释；API Key 一律走环境变量，不入库。
+    //
+    // "provider": {
+    //     "openrouter": {
+    //         "options": { "apiKey": "{env:OPENROUTER_KEY}" }
+    //     },
+    //     "deepseek": {
+    //         "options": { "apiKey": "{env:DEEPSEEK_API_KEY}" }
+    //     },
+    //     "ollama": {
+    //         "name": "Ollama (local)",
+    //         "npm": "@ai-sdk/openai-compatible",
+    //         "options": { "baseURL": "http://127.0.0.1:11434/v1" }
+    //     }
+    // },
+    // "model": "openrouter-compatible/anthropic/claude-sonnet-4.6",
+    // "small_model": "deepseek/deepseek-chat",
+    // "default_agent": "build"
+}
