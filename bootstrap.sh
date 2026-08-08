@@ -5,7 +5,7 @@
 # 目标环境：Ubuntu 24.04（x86_64）· fish · starship · ghostty · neovim(0.11+) · git
 # 本脚本负责：
 #   1. 安装基础依赖（curl、p7zip-full、fontconfig）
-#   2. 安装系统包：fish、git、ghostty、starship、fonts-noto-cjk、fd-find、bat、fzf、ripgrep、eza、zoxide、git-delta、lazygit、yazi、fisher、exiftool、cargo
+#   2. 安装系统包：fish、git、ghostty、starship、fonts-noto-cjk、fd-find、bat、fzf、ripgrep、eza、zoxide、git-delta、lazygit、yazi、tmux、atuin、fisher、exiftool、cargo
 #   3. 安装新版 Neovim（>= 0.11，本仓库 nvim 配置依赖 0.11+ API，Ubuntu 自带 0.9 不可用）
 #   4. 安装 fish 插件（fisher + fish_plugins 列表）
 #   5. 执行 ./install.sh（GNU Stow 软链各包到 $HOME）
@@ -104,6 +104,7 @@ PKGS=(
     fd-find bat fzf ripgrep eza zoxide
     git-delta               # git pager（.gitconfig 引用 delta）
     lazygit yazi            # nvim <leader>gg / fish y 函数
+    tmux atuin              # 终端复用 / shell 历史搜索
     exiftool                # nvim 插件（image/audio）可选依赖
     cargo                   # nvim mcp.lua 构建需要
 )
@@ -213,6 +214,25 @@ ensure_claude() {
     fi
 }
 ensure_claude
+
+# ============================================================================
+# 7.5. tmux 插件安装（TPM）
+# ============================================================================
+ensure_tmux_plugins() {
+    if ! cmd_exists tmux; then
+        warn "tmux 未安装，跳过插件安装"
+        return 0
+    fi
+    local tpm_dir="$HOME/.tmux/plugins/tpm"
+    if [ ! -d "$tpm_dir" ]; then
+        step "安装 TPM (Tmux Plugin Manager)..."
+        run git clone https://github.com/tmux-plugins/tpm "$tpm_dir"
+        info "TPM 安装完成。启动 tmux 后按 prefix + I (Ctrl+b 然后 I) 安装插件"
+    else
+        info "TPM 已安装"
+    fi
+}
+ensure_tmux_plugins
 
 # ============================================================================
 # 8. 中文回退字体检查（ghostty font-family 第二行需要）

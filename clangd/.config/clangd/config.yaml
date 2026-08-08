@@ -1,0 +1,27 @@
+# clangd 配置 - C/C++ LSP
+# 来源: archibate/dotfiles
+# 用途: 移除嵌入式/CUDA 专用编译 flag 噪声，开启 InlayHints
+
+CompileFlags:
+  Add:
+    - --no-cuda-version-check
+    - -Wno-unknown-warning-option
+    - -D__clangd__
+  Remove:
+    - -mlongcalls
+    - -fno-shrink-wrap
+    - -fno-tree-switch-conversion
+    - -fstrict-volatile-bitfields
+    - -forward-unknown-to-host-compiler
+    - -expt-*
+    - --expt-*
+    - -gencode*
+    - --generate-code*
+    - -Xfatbin*
+    - -arch=*
+    - -rdc=*
+    - -mno-*
+
+InlayHints:
+  ParameterNames: Yes
+  DeducedTypes: Yes

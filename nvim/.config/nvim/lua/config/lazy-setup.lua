@@ -47,7 +47,8 @@ require("lazy").setup({
         version = false, -- use latest version
     },
     install = {
-        colorscheme = { "tokyonight" },
+        -- 原教旨：不设第三方 colorscheme，使用 nvim 内置默认高亮
+        colorscheme = { "default" },
     },
     checker = {
         enabled = true,

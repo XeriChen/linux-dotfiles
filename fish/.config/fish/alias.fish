@@ -1,4 +1,4 @@
-# 别名与实用函数（骨架: archibate，剔除个人工作流 box/gethub/cmd/opencode/paru）
+# 别名与实用函数（骨架: archibate，剔除个人工作流 box/cmd/opencode/paru）
 # exa 已停止维护 -> Ubuntu 24 用 eza（含兼容 fallback）
 
 # ---- 基础 ----
@@ -85,6 +85,26 @@ end
 function mcd -a path
     mkdir -p $path
     cd $path
+end
+
+# gethub: clone GitHub 仓库到 ~/Codes/github.com/user/repo（已存在则 cd 进入）
+function gethub -a repo
+    if test -z "$repo"
+        echo "Usage: gethub user/repo"
+        return 1
+    end
+    if not string match -qr '^[^/]+/[^/]+$' $repo
+        echo "Error: Invalid format. Expected: user/repo"
+        return 1
+    end
+    set gh_base_dir ~/Codes/github.com
+    set clone_dir $gh_base_dir/$repo
+    if test -d $clone_dir
+        cd $clone_dir
+        return
+    end
+    mkdir -p (dirname $clone_dir)
+    git clone git@github.com:$repo.git $clone_dir; and cd $clone_dir
 end
 
 # SSH key 切换（多账号场景；推荐 ~/.ssh/config 用 Host 别名自动匹配）

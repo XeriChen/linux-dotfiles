@@ -23,8 +23,7 @@ for x in local atuin cargo npm-global
 end
 fish_add_path -U $__fish_config_dir/bin
 
-# 提示符由 starship 接管，不再设置 fish 主题
-# fish_config theme choose 'TokyoNight Moon'
+# 提示符由 starship 接管，不使用 fish 主题（保持默认）
 
 # 创建 .env 占位（可选环境变量文件）
 test -f $__fish_config_dir/.env; or touch $__fish_config_dir/.env

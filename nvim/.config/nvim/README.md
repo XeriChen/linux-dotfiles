@@ -104,10 +104,10 @@ lazy.nvim 只在安装/更新时执行 `build = "make"`；若首次构建失败�
 cd ~/.local/share/nvim/lazy/telescope-fzf-native.nvim && make
 ```
 
-### 主题不生效 / 颜色异常
+### 颜色异常
 
-`install.colorscheme = { "tokyonight" }`（lazy-setup.lua）在插件安装完成前使用内置 tokyonight；
-插件装完后由 `ui.lua` 接管。若颜色仍异常，检查终端是否启用真彩色（`termguicolors` 已在 options.lua 开启）。
+本配置遵循原教旨原则：不设第三方主题，使用 nvim 内置默认高亮（`colorscheme default`）。
+若颜色仍异常，检查终端是否启用真彩色（`termguicolors` 已在 options.lua 开启）。
 
 ## 目录结构
 

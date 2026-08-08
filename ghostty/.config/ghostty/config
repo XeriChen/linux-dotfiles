@@ -1,9 +1,6 @@
 # Ghostty 终端配置（Ubuntu 24）——精挑版
-# 主题: Catppuccin Mocha（与 starship 提示符 mocha 色系统一，ghostty 内置主题）
+# 原教旨原则：不设第三方主题，使用 ghostty 内置默认主题
 # 字体: UbuntuSansMono NFM（Nerd Font 图标体，仓库 fonts/ 包自带）; 中文回落 Noto Sans Mono CJK SC（系统自带, apt install fonts-noto-cjk）
-
-# === 主题 ===
-theme = catppuccin-mocha
 
 # === 字体（主字体含 Nerd Font 图标，中文回退到系统 CJK 等宽字体）===
 # 第一行主字体画 ASCII 与图标；第二行在遇中文时回退（ghostty 多 font-family 即回退链）。

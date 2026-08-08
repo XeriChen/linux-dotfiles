@@ -1,0 +1,75 @@
+# Atuin shell 历史搜索配置
+# 模板来源: archibate/dotfiles（全注释模板，按需启用）
+
+## 搜索模式: prefix / fulltext / fuzzy / skim
+search_mode = "fuzzy"
+
+## 过滤模式: global / host / session / session-preload / directory / workspace
+filter_mode = "global"
+
+## Shell 上下键绑定的过滤模式
+filter_mode_shell_up_key_binding = "session"
+
+## Shell 上下键绑定的搜索模式
+search_mode_shell_up_key_binding = "fuzzy"
+
+## UI 样式: auto / full / compact
+style = "auto"
+
+## 内联模式最大行数（0 = 全屏）
+inline_height = 20
+
+## 上下键绑定调用时的内联高度
+inline_height_shell_up_key_binding = 10
+
+## 时间显示时区
+timezone = "local"
+
+## 自动同步
+auto_sync = true
+
+## 同步频率
+sync_frequency = "10m"
+
+## 同步服务器地址（如需跨主机同步，注册后取消注释）
+# sync_address = "https://api.atuin.sh"
+
+## 更新检查
+update_check = true
+
+## 历史记录去重
+# 只在退出 shell 时清理（与 sponge 插件配合）
+# dialect = "us"
+
+## 搜索结果排序: accuracy / recency
+# search_mode = "skim" 时可用
+
+## 键盘布局
+# keymap_mode = "emacs"  # 或 "vim"
+# keymap_cursor = "blink"
+
+## 显示尺寸限制
+# max_preview_height = 4
+
+## 词分隔符（影响 Ctrl+w 删词范围）
+# word_chars = " \t\n{}[]()|'\";,<>"
+
+## 进入/退出动画
+# enter_accept = true
+
+## 历史过滤: 忽略以这些开头的命令
+history_filter = [
+    "^ls$",
+    "^cd $",
+    "^pwd$",
+    "^exit$",
+    "^clear$",
+]
+
+## 过滤模式切换（按 Tab 在 UI 中切换）
+# [search.filters]
+# global = "Ctrl+g"
+# host = "Ctrl+h"
+# session = "Ctrl+s"
+# directory = "Ctrl+d"
+# workspace = "Ctrl+w"
