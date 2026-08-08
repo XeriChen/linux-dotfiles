@@ -30,7 +30,7 @@
 
 ```
 fish  starship  ghostty  git  fonts  nvim  codex  opencode  claude
-atuin  fontconfig  tmux  clangd
+atuin  fontconfig  tmux  clangd  gdb  bin
 ```
 
 | 包 | 目标路径 | 关键约束 |
@@ -48,6 +48,8 @@ atuin  fontconfig  tmux  clangd
 | fontconfig | `~/.config/fontconfig/fonts.conf` | XML，中文字体优先级（优先 SC 而非 JP） |
 | tmux | `~/.config/tmux/` | 保留默认 prefix Ctrl+b，Alt 增量绑定（已处理 Alt+Tab/←/→ 冲突） |
 | clangd | `~/.config/clangd/config.yaml` | YAML，CUDA/ESP32 flag 清理 |
+| gdb | `~/.gdbinit` | GDB 调试器最小配置（94B） |
+| bin | `~/.local/bin/` | show-image 终端看图脚本（适配 ghostty） |
 
 ## 工作流：拉取上游 → 改写 → 收编
 

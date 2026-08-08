@@ -35,7 +35,9 @@ linux配置文件/
 ├── atuin/                # → ~/.config/atuin/config.toml（shell 历史搜索）
 ├── fontconfig/           # → ~/.config/fontconfig/fonts.conf（中文字体优先级）
 ├── tmux/                 # → ~/.config/tmux/（i3 风格 + TPM 插件 + scripts）
-└── clangd/               # → ~/.config/clangd/config.yaml（C/C++ LSP）
+├── clangd/               # → ~/.config/clangd/config.yaml（C/C++ LSP）
+├── gdb/                  # → ~/.gdbinit（关闭分页/确认，最小配置）
+└── bin/                  # → ~/.local/bin/show-image（终端内看图）
 ```
 
 ## 安装

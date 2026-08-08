@@ -11,7 +11,7 @@
 | 项目 | 值 |
 |------|-----|
 | 目标环境 | **Ubuntu 24.04（x86_64）+ fish + starship + ghostty** |
-| 配置管理 | GNU Stow（13 个 stow 包） |
+| 配置管理 | GNU Stow（15 个 stow 包） |
 | 开发机 | Windows（只在上面编写/整理，不运行不测试） |
 | 主远程 | GitHub：`https://github.com/XeriChen/linux-dotfiles` |
 | 镜像 | Gitee（国内加速）：`https://gitee.com/xeri_chen/linux-dotfiles` |
@@ -56,7 +56,7 @@
 
 ---
 
-## 三、当前 stow 包清单（13 个）
+## 三、当前 stow 包清单（15 个）
 
 每个顶层目录是一个 stow 包，目录内路径 = 安装后在 `$HOME` 下的相对路径。
 
@@ -75,6 +75,8 @@
 | 11 | **fontconfig** | `~/.config/fontconfig/fonts.conf` | 中文字体优先级：sans-serif/serif/monospace → Noto CJK SC，解决中文显示为日文 glyphs |
 | 12 | **tmux** | `~/.config/tmux/` | i3 风格 tmux 配置：保留默认 prefix Ctrl+b，Alt 增量绑定，含 TPM 插件 + 4 scripts |
 | 13 | **clangd** | `~/.config/clangd/config.yaml` | C/C++ LSP 配置：清理 CUDA/ESP32 编译 flag + InlayHints |
+| 14 | **gdb** | `~/.gdbinit` | GDB 调试器最小配置：关闭分页和操作确认（94B） |
+| 15 | **bin** | `~/.local/bin/` | 实用脚本：show-image（终端内看图，支持 kitty/ghostty）+ tmux 穿透 |
 
 ---
 
@@ -129,6 +131,8 @@
 - **starship**：默认配色 + OS 图标（33 种系统识别）+ 用户名显示 + cmd_duration 通知（>3s）
 - **git**：delta pager（dark 模式）+ zdiff3 merge conflictStyle + 15 个 alias
 - **proxy-switch.sh**：mihomo 默认端口 7897，可 `PROXY_PORT=xxxx proxy_on` 覆盖；`gh_clone owner/repo` 走 ghproxy.com 镜像
+- **gdb**：关闭分页/操作确认/auto-load 安全路径全开，每次 `gdb` 启动自动生效
+- **show-image**：终端看图脚本，支持 kitty 图形协议（ghostty 兼容）+ tmux 穿透 + sixel fallback
 
 ---
 
@@ -147,7 +151,7 @@ cd ~/linux配置文件
 2. 安装系统包：fish、git、ghostty、starship、fonts-noto-cjk、fd-find、bat、fzf、ripgrep、eza、zoxide、git-delta、lazygit、yazi、tmux、atuin、fisher、exiftool、cargo
 3. 安装 Neovim >= 0.11（ppa:neovim-ppa/unstable）
 4. 安装 fish 插件（fisher + fish_plugins 列表）
-5. 执行 `install.sh`（GNU Stow 软链 13 个包到 $HOME）
+5. 执行 `install.sh`（GNU Stow 软链 15 个包到 $HOME）
 6. 检查中文字体回退链
 7. 安装 OpenCode（+ Node>=22 & uv 提示）+ Claude Code（官方 installer）
 8. 安装 tmux 插件管理器（TPM）
@@ -172,8 +176,8 @@ cd ~/linux配置文件
 
 | 上游仓库 | 用途 |
 |----------|------|
-| **archibate-dotfiles** | fish/nvim/starship/ghostty/tmux/fontconfig/atuin/lazygit/yazi/clangd 等参考（主参考源） |
-| **dotfiles-claude-main** | Claude Code 完整配置（settings.json + hooks + providers + skills） |
+| **archibate-dotfiles** | fish/nvim/starship/ghostty/tmux/fontconfig/atuin/clangd/gdb 等参考（主参考源） |
+| **dotfiles-claude-main** | Claude Code 完整配置（settings.json + hooks + providers + skills + bin/show-image） |
 | **dotfiles-codex-main** | Codex CLI 配置（config.toml + rules） |
 | **terminal-setup-main** | starship/ghostty/fish 终端参考 |
 
@@ -185,10 +189,12 @@ cd ~/linux配置文件
 | atuin | archibate | 全注释模板，按需取消注释 |
 | fontconfig | archibate | 中文字体优先级，解决 CJK glyphs 问题 |
 | clangd | archibate | CUDA/ESP32 flag 清理 + InlayHints |
+| gdb (.gdbinit) | archibate | 关闭分页和操作确认（94B） |
 | fish gethub 函数 | archibate | clone → ~/Codes/github.com/ |
 | fish alias.fish 骨架 | archibate | 精选保留，剔除个人工作流 |
 | opencode AGENTS.md 偏好 | archibate | 中文回复/ASCII 连字符/uv 优先/4 空格/PTY 后台任务 |
 | claude 全套 | dotfiles-claude-main | settings.json + hooks + providers + skills |
+| bin/show-image | dotfiles-claude-main | 终端看图，已适配 ghostty |
 | codex | dotfiles-codex-main | config.toml + rules |
 
 ### 6.3 评估后未采纳的配置
@@ -197,6 +203,8 @@ cd ~/linux配置文件
 |------|------|
 | **lazygit** | 纯 catppuccin 主题，违反原教旨主题原则。lazygit 工具本体仍通过系统包安装 |
 | **yazi** | 纯 catppuccin-mocha 主题，syntect_theme 引用缺失。yazi 工具本体仍通过系统包安装 |
+| claude-usage | 用户表示不需要（2026-08-08 17:52） |
+| integration.sh（fuck/commit 等） | 用户表示不需要（2026-08-08 17:52） |
 | alacritty | 158 个主题文件，用户用 ghostty |
 | kitty | 116KB 全默认注释，用户用 ghostty |
 | wezterm | 跨平台终端配置，用户用 ghostty |
@@ -238,3 +246,5 @@ cd ~/linux配置文件
 | Gitee 镜像 | `git clone https://gitee.com/xeri_chen/linux-dotfiles.git`（无需代理） |
 | mihomo 代理 | `source proxy-switch.sh && proxy_on`（默认 7897 端口） |
 | 镜像 clone | `gh_clone owner/repo`（ghproxy.com）或 `MIRROR=kgithub.com gh_clone owner/repo` |
+
+> **2026-08-08 17:52**：新增 gdb 包（.gdbinit 94B）+ bin 包（show-image 终端看图脚本，已适配 ghostty）。

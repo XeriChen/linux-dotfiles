@@ -18,7 +18,7 @@ cd "$(dirname "$0")"
 
 # fonts 包重新纳入：UbuntuSansMono NFM 字体文件随仓库走（已收进 git），
 # 中文回退用的 Noto Sans Mono CJK SC 由系统包 fonts-noto-cjk 提供，不进仓库。
-packages=(fish starship ghostty git fonts nvim codex opencode claude atuin fontconfig tmux clangd)
+packages=(fish starship ghostty git fonts nvim codex opencode claude atuin fontconfig tmux clangd gdb bin)
 
 if ! command -v stow >/dev/null 2>&1; then
   echo "未找到 GNU Stow，请先安装： sudo apt install stow"
