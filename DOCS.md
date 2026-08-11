@@ -147,14 +147,21 @@ cd ~/linux配置文件
 ```
 
 `bootstrap.sh` 自动完成：
-1. 安装基础依赖（curl、p7zip-full、fontconfig、stow）
-2. 安装系统包：fish、git、ghostty、starship、fonts-noto-cjk、fd-find、bat、fzf、ripgrep、eza、zoxide、git-delta、lazygit、yazi、tmux、atuin、fisher、exiftool、cargo
-3. 安装 Neovim >= 0.11（ppa:neovim-ppa/unstable）
-4. 安装 fish 插件（fisher + fish_plugins 列表）
-5. 执行 `install.sh`（GNU Stow 软链 15 个包到 $HOME）
-6. 检查中文字体回退链
-7. 安装 OpenCode（+ Node>=22 & uv 提示）+ Claude Code（官方 installer）
-8. 安装 tmux 插件管理器（TPM）
+1. 检查部署所需环境（stow、fish、tmux、nvim、ghostty）
+2. 执行 `install.sh`（GNU Stow 软链各包到 `$HOME`）
+3. 安装 fish 插件（fisher + `fish_plugins` 列表）
+4. 安装 tmux 插件管理器（TPM）
+5. 检查中文字体回退链
+
+系统工具安装由 `setup.sh` 及 `setup/` 下的脚本负责，而不是 `bootstrap.sh`。
+
+部署完成后建议运行：
+
+```bash
+~/.local/bin/check-dotfiles
+```
+
+健康检查会验证常用工具、Neovim `lazy-lock.json`、Git local config、fish 插件、TPM、Stow 链接以及字体。
 
 ### 手动安装（仅 stow 软链）
 

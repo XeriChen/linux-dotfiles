@@ -1,0 +1,95 @@
+#!/usr/bin/env bash
+# check-dotfiles — 检查 dotfiles 部署健康状态
+set -u
+
+ok() { echo "[✓] $*"; }
+warn() { echo "[!] $*"; }
+
+echo "Linux dotfiles health check"
+echo ""
+
+check_cmd() {
+    if command -v "$1" >/dev/null 2>&1; then
+        ok "$1"
+    else
+        warn "$1 未安装"
+    fi
+}
+
+check_cmd stow
+check_cmd fish
+check_cmd nvim
+check_cmd tmux
+check_cmd ghostty
+
+echo ""
+
+# GNU Stow 链接检查
+if command -v stow >/dev/null 2>&1; then
+    repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+    stow_ok=true
+    for target in fish starship ghostty git nvim tmux; do
+        case "$target" in
+            fish) link="$HOME/.config/fish" ;;
+            starship) link="$HOME/.config/starship.toml" ;;
+            ghostty) link="$HOME/.config/ghostty" ;;
+            git) link="$HOME/.gitconfig" ;;
+            nvim) link="$HOME/.config/nvim" ;;
+            tmux) link="$HOME/.config/tmux" ;;
+        esac
+        if [ -L "$link" ] && [ -e "$link" ]; then
+            ok "Stow $target"
+        else
+            warn "Stow $target 未正确链接"
+            stow_ok=false
+        fi
+    done
+fi
+
+echo ""
+
+# 配置文件检查
+if [ -f "$HOME/.config/nvim/lazy-lock.json" ]; then
+    ok "Neovim lazy-lock"
+else
+    warn "Neovim lazy-lock 未找到"
+fi
+
+if [ -f "$HOME/.gitconfig.local" ]; then
+    ok "Git local config"
+else
+    warn "Git local config 未创建"
+fi
+
+if [ -f "$HOME/.config/fish/fish_plugins" ]; then
+    ok "fish plugins"
+else
+    warn "fish plugins 未找到"
+fi
+
+if [ -d "$HOME/.tmux/plugins/tpm" ]; then
+    ok "tmux TPM"
+else
+    warn "tmux TPM 未安装"
+fi
+
+if command -v nvim >/dev/null 2>&1; then
+    nvim --version | head -n1
+fi
+
+if command -v fc-match >/dev/null 2>&1; then
+    if fc-match "UbuntuSansMono" >/dev/null 2>&1; then
+        ok "UbuntuSansMono 字体"
+    else
+        warn "UbuntuSansMono 未找到"
+    fi
+
+    if fc-match "Noto Sans Mono CJK SC" >/dev/null 2>&1; then
+        ok "Noto CJK 中文回退字体"
+    else
+        warn "Noto CJK 中文回退字体未找到"
+    fi
+fi
+
+echo ""
+echo "检查完成。"

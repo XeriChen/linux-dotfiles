@@ -1,9 +1,8 @@
 # Git 全局配置（Ubuntu 24）
 # delta 增强依赖: sudo apt install git-delta（未装时 git 自动回退默认 pager）
 
-[user]
-    name = Chen Xiaorui
-    email = xeri_chen@163.com
+[include]
+    path = ~/.gitconfig.local
 
 [init]
     defaultBranch = main

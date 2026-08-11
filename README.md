@@ -46,13 +46,18 @@ linux配置文件/
 # 一键部署（推荐）
 git clone https://github.com/XeriChen/linux-dotfiles.git ~/linux配置文件
 cd ~/linux配置文件
-./bootstrap.sh            # 交互确认，--yes 跳过
+./bootstrap.sh            # 环境检查 + 配置部署；--yes 跳过确认
+
+# 部署后检查
+~/.local/bin/check-dotfiles
 
 # 或手动只做软链
 ./install.sh
 ```
 
-> ⚠️ Neovim 需 >= 0.11（Ubuntu 24 自带 0.9.5），bootstrap.sh 会自动添加 PPA 安装新版。
+> ⚠️ Neovim 需 >= 0.11（Ubuntu 24 自带 0.9.5）；请先通过 `setup.sh` 安装满足版本要求的 Neovim。
+
+> 系统工具安装由 `setup.sh` 负责；`bootstrap.sh` 负责环境检查、GNU Stow 配置部署以及 fish/TPM 等必要插件初始化。
 
 ## 更多信息
 

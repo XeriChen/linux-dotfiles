@@ -1,0 +1,6 @@
+# 复制为 ~/.gitconfig.local 后填写个人信息
+# 不要提交真实邮箱或账号
+
+[user]
+    name = Your Name
+    email = your@email.example
